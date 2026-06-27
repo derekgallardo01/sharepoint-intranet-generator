@@ -22,6 +22,19 @@ def test_validation_passes_for_sample_definition():
     assert errors == []
 
 
+def test_alternate_industry_definition_validates_and_renders():
+    alt = os.path.join(os.path.dirname(HERE), "examples",
+                       "site-definition-acme-manufacturing.json")
+    errors = [e for e in validate(alt) if e.severity == "error"]
+    assert errors == [], f"alternate def has errors: {errors[:3]}"
+    pages = render_all(load_intranet(alt))
+    for key in ("production", "quality", "supply-chain", "engineering",
+                "faq", "people"):
+        assert f"{key}.html" in pages, f"missing {key}.html in render"
+    assert "Plant Manager" in pages["people.html"]
+    assert "Incident report" in pages["faq.html"]
+
+
 def test_validation_catches_missing_org():
     errors = validate({"hub": {"title": "x"}, "tenant": "x"})
     assert any("missing required key 'org'" in e.message for e in errors)

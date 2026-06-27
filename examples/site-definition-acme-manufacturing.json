@@ -1,0 +1,220 @@
+{
+  "$schema": "https://example.invalid/sharepoint-intranet-blueprint/v1",
+  "tenant": "acmemfg.sharepoint.com",
+  "org": "Acme Manufacturing",
+  "theme": {
+    "primary": "#27457b",
+    "accent": "#e8a33d",
+    "logoText": "Acme"
+  },
+  "hub": {
+    "title": "Acme Manufacturing Intranet",
+    "url": "/sites/intranet",
+    "template": "communication",
+    "owner": "Acme-Intranet-Owners",
+    "description": "Production, quality, supply chain, and engineering in one place."
+  },
+  "navigation": {
+    "global": [
+      { "label": "Home", "page": "index" },
+      { "label": "News", "page": "news" },
+      { "label": "Production", "page": "production" },
+      { "label": "Quality", "page": "quality" },
+      { "label": "Supply Chain", "page": "supply-chain" },
+      { "label": "Engineering", "page": "engineering" },
+      { "label": "People", "page": "people" },
+      { "label": "FAQ", "page": "faq" },
+      { "label": "Document Center", "page": "document-center" }
+    ]
+  },
+  "sites": [
+    {
+      "key": "production",
+      "title": "Production",
+      "url": "/sites/intranet-production",
+      "summary": "Daily plant operations, shift schedules, and standard operating procedures.",
+      "permissions": {
+        "owners": "Acme-Production-Owners",
+        "members": "Acme-Production-Members",
+        "visitors": "Acme-AllStaff",
+        "inheritance": "broken"
+      },
+      "libraries": [
+        {
+          "name": "Standard Operating Procedures",
+          "contentType": "Acme SOP",
+          "retention": "Keep 10 years after Effective Date",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Line", "type": "Choice", "required": true },
+            { "name": "Owner", "type": "Person", "required": true },
+            { "name": "Effective Date", "type": "Date", "required": true },
+            { "name": "Review Date", "type": "Date", "required": false }
+          ]
+        }
+      ],
+      "links": ["Shift schedule", "Daily production board", "Downtime report", "Incident report form"]
+    },
+    {
+      "key": "quality",
+      "title": "Quality",
+      "url": "/sites/intranet-quality",
+      "summary": "Inspection plans, non-conformances, audits, and ISO documentation.",
+      "permissions": {
+        "owners": "Acme-Quality-Owners",
+        "members": "Acme-Quality-Members",
+        "visitors": "Acme-AllStaff",
+        "inheritance": "broken"
+      },
+      "libraries": [
+        {
+          "name": "Non-Conformance Reports",
+          "contentType": "Acme NCR",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Severity", "type": "Choice", "required": true },
+            { "name": "Owner", "type": "Person", "required": true },
+            { "name": "Status", "type": "Choice", "required": true },
+            { "name": "Opened", "type": "Date", "required": true },
+            { "name": "Closed", "type": "Date", "required": false }
+          ]
+        }
+      ],
+      "links": ["Open NCRs", "Inspection plans", "Audit calendar", "ISO 9001 evidence"]
+    },
+    {
+      "key": "supply-chain",
+      "title": "Supply Chain",
+      "url": "/sites/intranet-supplychain",
+      "summary": "Supplier records, contracts, and PO process.",
+      "permissions": {
+        "owners": "Acme-SupplyChain-Owners",
+        "members": "Acme-SupplyChain-Members",
+        "visitors": "Acme-AllStaff",
+        "inheritance": "inherited"
+      },
+      "libraries": [
+        {
+          "name": "Supplier Records",
+          "contentType": "Acme Supplier",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Category", "type": "Choice", "required": true },
+            { "name": "Owner", "type": "Person", "required": true },
+            { "name": "Risk Rating", "type": "Choice", "required": false }
+          ]
+        }
+      ],
+      "links": ["PO process", "Approved supplier list", "Supplier scorecard"]
+    },
+    {
+      "key": "engineering",
+      "title": "Engineering",
+      "url": "/sites/intranet-engineering",
+      "summary": "Drawings, ECNs, and design reviews.",
+      "permissions": {
+        "owners": "Acme-Engineering-Owners",
+        "members": "Acme-Engineering-Members",
+        "visitors": "Acme-AllStaff",
+        "inheritance": "inherited"
+      },
+      "libraries": [
+        {
+          "name": "Engineering Drawings",
+          "contentType": "Acme Drawing",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Part Number", "type": "Text", "required": true },
+            { "name": "Revision", "type": "Text", "required": true },
+            { "name": "Owner", "type": "Person", "required": true }
+          ]
+        }
+      ],
+      "links": ["ECN process", "Design review template", "CAD standards"]
+    },
+    {
+      "key": "faq",
+      "type": "faq",
+      "title": "Plant FAQ",
+      "url": "/sites/intranet-faq",
+      "summary": "The questions Production, Quality, and Supply Chain answer most often.",
+      "questions": [
+        { "q": "Where do I file an incident report?", "a": "Use the Incident report form on the Production page. Your shift supervisor is auto-notified." },
+        { "q": "How do I open a non-conformance report (NCR)?", "a": "On the Quality page, open the Non-Conformance Reports library and use New. Set severity and owner before saving." },
+        { "q": "Where is the approved supplier list?", "a": "On the Supply Chain page under quick links." },
+        { "q": "Who approves an Engineering Change Notice (ECN)?", "a": "The Engineering lead for the affected line, plus Quality if the change touches a controlled drawing." }
+      ]
+    },
+    {
+      "key": "people",
+      "type": "people",
+      "title": "Plant directory",
+      "url": "/sites/intranet-people",
+      "summary": "Plant leadership and the leads of each function.",
+      "people": [
+        { "name": "J. Park", "title": "Plant Manager", "email": "j.park@acmemfg.com" },
+        { "name": "B. Singh", "title": "Production Lead - Line A", "email": "b.singh@acmemfg.com" },
+        { "name": "M. Olufemi", "title": "Production Lead - Line B", "email": "m.olufemi@acmemfg.com" },
+        { "name": "T. Voss", "title": "Quality Manager", "email": "t.voss@acmemfg.com" },
+        { "name": "R. Diaz", "title": "Supply Chain Lead", "email": "r.diaz@acmemfg.com" },
+        { "name": "K. Nguyen", "title": "Engineering Lead", "email": "k.nguyen@acmemfg.com" }
+      ]
+    }
+  ],
+  "documentCenter": {
+    "key": "document-center",
+    "title": "Document Center",
+    "url": "/sites/intranet-docs",
+    "summary": "Controlled documents (SOPs, drawings, supplier contracts) by metadata.",
+    "libraries": [
+      {
+        "name": "Standard Operating Procedures",
+        "columns": ["Line", "Owner", "Effective Date", "Review Date"],
+        "documents": [
+          { "Title": "SOP-PROD-001 Line A Startup", "Line": "Line A", "Owner": "B. Singh", "Effective Date": "2026-02-01", "Review Date": "2027-02-01" },
+          { "Title": "SOP-PROD-014 Line B Changeover", "Line": "Line B", "Owner": "M. Olufemi", "Effective Date": "2026-04-15", "Review Date": "2027-04-15" },
+          { "Title": "SOP-QC-008 In-process Inspection", "Line": "Both", "Owner": "T. Voss", "Effective Date": "2026-03-10", "Review Date": "2027-03-10" }
+        ]
+      },
+      {
+        "name": "Engineering Drawings",
+        "columns": ["Part Number", "Revision", "Owner"],
+        "documents": [
+          { "Title": "Bracket assembly", "Part Number": "PN-1042", "Revision": "B", "Owner": "K. Nguyen" },
+          { "Title": "Housing - upper", "Part Number": "PN-1187", "Revision": "C", "Owner": "K. Nguyen" }
+        ]
+      },
+      {
+        "name": "Supplier Contracts",
+        "columns": ["Category", "Owner"],
+        "documents": [
+          { "Title": "Acme - Vendor X MSA 2025", "Category": "Raw Material", "Owner": "R. Diaz" },
+          { "Title": "Acme - Vendor Y MSA 2026", "Category": "Logistics", "Owner": "R. Diaz" }
+        ]
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "index",
+      "title": "Home",
+      "layout": "home",
+      "sections": [
+        { "webPart": "Hero", "text": "Welcome to the Acme Manufacturing Intranet" },
+        { "webPart": "News", "text": "Plant news" },
+        { "webPart": "QuickLinks", "text": "Quick links" }
+      ]
+    }
+  ],
+  "news": [
+    { "title": "Line B changeover complete - back to production Monday", "date": "2026-06-20", "summary": "Line B is back online after the scheduled 6-day changeover; first runs verified by QC." },
+    { "title": "ISO 9001 surveillance audit scheduled for August 12", "date": "2026-06-12", "summary": "Department leads: please complete the audit-prep checklist by July 31." },
+    { "title": "New PPE policy in effect Aug 1", "date": "2026-06-02", "summary": "Hi-vis required in all yard areas; safety boots mandatory on production floors." }
+  ],
+  "governanceNotes": {
+    "permissions": "Grant to groups, never individuals. Plant Manager has Read across all sections.",
+    "naming": "SOPs use SOP-<area>-<###> naming. Drawings use PN-<####> with a Revision letter.",
+    "retention": "10-year retention on SOPs and ISO evidence; default elsewhere.",
+    "lifecycle": "Quarterly review of NCRs and supplier scorecard; annual review of SOPs."
+  }
+}

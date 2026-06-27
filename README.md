@@ -101,6 +101,7 @@ page types are good worked examples for how to add a third.
 | Path | Purpose |
 |------|---------|
 | [site-definition.json](site-definition.json) | The single source of truth: site, nav, sections, FAQ, people, news, documents, governance notes. |
+| [examples/site-definition-acme-manufacturing.json](examples/site-definition-acme-manufacturing.json) | A second worked definition — a manufacturing-company intranet (Production / Quality / Supply Chain / Engineering + FAQ + Plant directory). Proves the generator on a different industry. |
 | [intranet_gen/model.py](intranet_gen/model.py) | Typed dataclasses for each blueprint slice. |
 | [intranet_gen/validate.py](intranet_gen/validate.py) | Structural + reference validation with dotted-path errors. |
 | [intranet_gen/render.py](intranet_gen/render.py) | Renderers per `Site.type`: section, FAQ, people, document-center, home, news. |

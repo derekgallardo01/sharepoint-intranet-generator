@@ -20,5 +20,7 @@ jobs:
         run: python -m pytest -q
       - name: Eval harness (validation cases)
         run: python evals/run.py
-      - name: Smoke-test the demo
+      - name: Smoke-test the demo (Meridian Advisory)
         run: python run.py
+      - name: Smoke-test the alternate definition (Acme Manufacturing)
+        run: python cli.py generate examples/site-definition-acme-manufacturing.json --out /tmp/acme-intranet
