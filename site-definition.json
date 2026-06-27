@@ -1,0 +1,181 @@
+{
+  "$schema": "https://example.invalid/sharepoint-intranet-blueprint/v1",
+  "tenant": "<your-tenant>.sharepoint.com",
+  "org": "Meridian Advisory",
+  "theme": {
+    "primary": "#1f5673",
+    "accent": "#c9a14a",
+    "logoText": "Meridian"
+  },
+  "hub": {
+    "title": "Meridian Intranet",
+    "url": "/sites/intranet",
+    "template": "communication",
+    "owner": "Meridian-Intranet-Owners",
+    "description": "One home for company news, sections, and documents."
+  },
+  "navigation": {
+    "global": [
+      { "label": "Home", "page": "index" },
+      { "label": "News", "page": "news" },
+      { "label": "HR", "page": "hr" },
+      { "label": "IT", "page": "it" },
+      { "label": "Policies", "page": "policies" },
+      { "label": "Document Center", "page": "document-center" }
+    ]
+  },
+  "sites": [
+    {
+      "key": "hr",
+      "title": "HR",
+      "url": "/sites/intranet-hr",
+      "template": "communication",
+      "summary": "Onboarding, benefits, and people resources.",
+      "permissions": {
+        "owners": "Meridian-HR-Owners",
+        "members": "Meridian-HR-Members",
+        "visitors": "Meridian-AllStaff",
+        "inheritance": "broken"
+      },
+      "libraries": [
+        {
+          "name": "HR Documents",
+          "contentType": "Meridian HR Document",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Audience", "type": "Choice", "required": false },
+            { "name": "Owner", "type": "Person", "required": true },
+            { "name": "Effective Date", "type": "Date", "required": false }
+          ]
+        }
+      ],
+      "links": [
+        "Onboarding checklist",
+        "Benefits overview",
+        "Org chart",
+        "Time-off request"
+      ]
+    },
+    {
+      "key": "it",
+      "title": "IT",
+      "url": "/sites/intranet-it",
+      "template": "communication",
+      "summary": "How-to guides and service requests.",
+      "permissions": {
+        "owners": "Meridian-IT-Owners",
+        "members": "Meridian-IT-Members",
+        "visitors": "Meridian-AllStaff",
+        "inheritance": "inherited"
+      },
+      "libraries": [
+        {
+          "name": "IT Knowledge Base",
+          "contentType": "Meridian KB Article",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Category", "type": "Choice", "required": false },
+            { "name": "Owner", "type": "Person", "required": true }
+          ]
+        }
+      ],
+      "links": [
+        "Reset your password",
+        "Request software",
+        "Report an issue",
+        "VPN setup"
+      ]
+    },
+    {
+      "key": "policies",
+      "title": "Policies",
+      "url": "/sites/intranet-policies",
+      "template": "communication",
+      "summary": "Controlled company policies.",
+      "permissions": {
+        "owners": "Meridian-Policy-Owners",
+        "members": "Meridian-Policy-Members",
+        "visitors": "Meridian-AllStaff",
+        "inheritance": "broken"
+      },
+      "libraries": [
+        {
+          "name": "Controlled Policies",
+          "contentType": "Meridian Policy",
+          "retention": "Keep 7 years after Effective Date",
+          "columns": [
+            { "name": "Title", "type": "Text", "required": true },
+            { "name": "Department", "type": "Choice", "required": true },
+            { "name": "Owner", "type": "Person", "required": true },
+            { "name": "Status", "type": "Choice", "required": true },
+            { "name": "Effective Date", "type": "Date", "required": false },
+            { "name": "Review Date", "type": "Date", "required": false }
+          ]
+        }
+      ],
+      "links": [
+        "Code of conduct",
+        "Expense policy",
+        "Information security policy"
+      ]
+    }
+  ],
+  "documentCenter": {
+    "key": "document-center",
+    "title": "Document Center",
+    "url": "/sites/intranet-docs",
+    "summary": "Every controlled document, found by metadata not folders.",
+    "libraries": [
+      {
+        "name": "Controlled Policies",
+        "columns": ["Department", "Owner", "Status", "Review Date"],
+        "documents": [
+          { "Title": "Code of Conduct", "Department": "HR", "Owner": "A. Okafor", "Status": "Approved", "Review Date": "2026-09-01" },
+          { "Title": "Expense Policy", "Department": "Finance", "Owner": "L. Tan", "Status": "Approved", "Review Date": "2026-07-15" },
+          { "Title": "Information Security Policy", "Department": "IT", "Owner": "R. Vasquez", "Status": "Review", "Review Date": "2026-06-30" },
+          { "Title": "Remote Work Policy", "Department": "HR", "Owner": "A. Okafor", "Status": "Draft", "Review Date": "2026-12-01" }
+        ]
+      },
+      {
+        "name": "Templates",
+        "columns": ["Category", "Owner"],
+        "documents": [
+          { "Title": "Engagement Letter (template)", "Category": "Sales", "Owner": "M. Idris" },
+          { "Title": "Statement of Work (template)", "Category": "Delivery", "Owner": "M. Idris" },
+          { "Title": "New Hire Checklist (template)", "Category": "HR", "Owner": "A. Okafor" }
+        ]
+      },
+      {
+        "name": "Contracts",
+        "columns": ["Client", "Effective Date", "Owner"],
+        "documents": [
+          { "Title": "Acme MSA", "Client": "Acme Co", "Effective Date": "2025-04-01", "Owner": "M. Idris" },
+          { "Title": "Northwind SOW 14", "Client": "Northwind", "Effective Date": "2026-01-10", "Owner": "S. Bauer" }
+        ]
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "index",
+      "title": "Home",
+      "layout": "home",
+      "sections": [
+        { "webPart": "Hero", "text": "Welcome to the Meridian Intranet" },
+        { "webPart": "News", "text": "Latest company news" },
+        { "webPart": "QuickLinks", "text": "Quick links" }
+      ]
+    }
+  ],
+  "news": [
+    { "title": "Q3 all-hands scheduled for July 18", "date": "2026-06-20", "summary": "Agenda and dial-in details inside." },
+    { "title": "New expense policy now in effect", "date": "2026-06-12", "summary": "Submit reimbursements through the updated form." },
+    { "title": "London office opening in September", "date": "2026-06-02", "summary": "Relocation and hiring details for the new site." }
+  ],
+  "governanceNotes": {
+    "permissions": "Grant to groups, never individuals. Owners=Full control, Members=Edit, Visitors=Read.",
+    "naming": "Sections lowercase in URLs; libraries Title Case; no dates in titles.",
+    "retention": "Retention labels on Policies and Contracts; default elsewhere.",
+    "lifecycle": "Provision -> Populate -> Quarterly review -> Archive."
+  }
+}
