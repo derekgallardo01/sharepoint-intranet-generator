@@ -1,0 +1,109 @@
+[
+  {
+    "id": "minimal-valid",
+    "definition": {"org": "Acme", "hub": {"title": "Acme Intranet"}, "tenant": "acme.sharepoint.com"},
+    "expect": {"valid": true}
+  },
+  {
+    "id": "missing-org",
+    "definition": {"hub": {"title": "Acme Intranet"}, "tenant": "acme.sharepoint.com"},
+    "expect": {"valid": false, "errors_contain": ["missing required key 'org'"]}
+  },
+  {
+    "id": "missing-hub",
+    "definition": {"org": "Acme", "tenant": "acme.sharepoint.com"},
+    "expect": {"valid": false, "errors_contain": ["missing required key 'hub'"]}
+  },
+  {
+    "id": "missing-tenant-warns",
+    "definition": {"org": "Acme", "hub": {"title": "Acme Intranet"}},
+    "expect": {"valid": true, "warnings_contain": ["missing 'tenant'"]}
+  },
+  {
+    "id": "duplicate-section-keys",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [
+        {"key": "hr", "title": "HR"},
+        {"key": "hr", "title": "HR Again"}
+      ]
+    },
+    "expect": {"valid": false, "errors_contain": ["duplicate section key 'hr'"]}
+  },
+  {
+    "id": "section-missing-key",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"title": "HR"}]
+    },
+    "expect": {"valid": false, "errors_contain": ["section is missing 'key'"]}
+  },
+  {
+    "id": "section-missing-title",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "hr"}]
+    },
+    "expect": {"valid": false, "errors_contain": ["section is missing 'title'"]}
+  },
+  {
+    "id": "nav-points-at-undefined-section",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "hr", "title": "HR"}],
+      "navigation": {"global": [{"label": "Policies", "page": "policies"}]}
+    },
+    "expect": {"valid": false, "errors_contain": ["referenced in nav but not defined"]}
+  },
+  {
+    "id": "doc-center-owned-by-unknown",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "hr", "title": "HR"}],
+      "documentCenter": {"libraries": [{"name": "L1", "ownedBy": "ghost"}]}
+    },
+    "expect": {"valid": false, "errors_contain": ["unknown section 'ghost'"]}
+  },
+  {
+    "id": "news-missing-title",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "news": [{"date": "2026-06-01", "summary": "no title"}]
+    },
+    "expect": {"valid": false, "errors_contain": ["news item is missing 'title'"]}
+  },
+  {
+    "id": "faq-without-questions",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "faq", "title": "FAQ", "type": "faq"}]
+    },
+    "expect": {"valid": false, "errors_contain": ["faq section must define at least one question"]}
+  },
+  {
+    "id": "faq-entry-missing-answer",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "faq", "title": "FAQ", "type": "faq",
+                 "questions": [{"q": "How?"}]}]
+    },
+    "expect": {"valid": false, "errors_contain": ["faq entry is missing 'a'"]}
+  },
+  {
+    "id": "people-without-people",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "p", "title": "People", "type": "people"}]
+    },
+    "expect": {"valid": false, "errors_contain": ["people section must list at least one person"]}
+  },
+  {
+    "id": "person-missing-name",
+    "definition": {
+      "org": "Acme", "tenant": "acme.sharepoint.com", "hub": {"title": "x"},
+      "sites": [{"key": "p", "title": "People", "type": "people",
+                 "people": [{"title": "Engineer"}]}]
+    },
+    "expect": {"valid": false, "errors_contain": ["person is missing 'name'"]}
+  }
+]

@@ -21,6 +21,8 @@
       { "label": "HR", "page": "hr" },
       { "label": "IT", "page": "it" },
       { "label": "Policies", "page": "policies" },
+      { "label": "People", "page": "people" },
+      { "label": "FAQ", "page": "faq" },
       { "label": "Document Center", "page": "document-center" }
     ]
   },
@@ -117,6 +119,33 @@
         "Code of conduct",
         "Expense policy",
         "Information security policy"
+      ]
+    },
+    {
+      "key": "faq",
+      "type": "faq",
+      "title": "Frequently asked questions",
+      "url": "/sites/intranet-faq",
+      "summary": "The questions HR and IT answer most often.",
+      "questions": [
+        { "q": "How do I reset my password?", "a": "Use the self-service portal at portal.example.com; new password takes effect immediately." },
+        { "q": "When do new employees accrue PTO?", "a": "New employees start with 15 days of PTO per year, accruing monthly from day one." },
+        { "q": "Who do I contact about a security incident?", "a": "Email security@example.com or call the 24/7 hotline — do not investigate on your own." },
+        { "q": "Can I install Slack on my work laptop?", "a": "Submit a software request through the IT portal; approvals usually take 1–2 business days." }
+      ]
+    },
+    {
+      "key": "people",
+      "type": "people",
+      "title": "People directory",
+      "url": "/sites/intranet-people",
+      "summary": "Section leads and their best contact details.",
+      "people": [
+        { "name": "A. Okafor", "title": "Head of People & Culture", "email": "a.okafor@example.com" },
+        { "name": "R. Vasquez", "title": "Head of IT & Security", "email": "r.vasquez@example.com" },
+        { "name": "L. Tan", "title": "Head of Finance", "email": "l.tan@example.com" },
+        { "name": "M. Idris", "title": "Head of Delivery", "email": "m.idris@example.com" },
+        { "name": "S. Bauer", "title": "Operations Manager", "email": "s.bauer@example.com" }
       ]
     }
   ],

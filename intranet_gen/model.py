@@ -48,8 +48,43 @@ class Library:
 
 
 @dataclass
+class FaqEntry:
+    """One Q-and-A pair on a FAQ section page."""
+
+    q: str
+    a: str
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> "FaqEntry":
+        return cls(q=str(d.get("q", "")), a=str(d.get("a", "")))
+
+
+@dataclass
+class Person:
+    """One card in a Person Directory section."""
+
+    name: str
+    title: str = ""
+    email: str = ""
+    photo_url: str = ""
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> "Person":
+        return cls(
+            name=str(d.get("name", "")),
+            title=str(d.get("title", "")),
+            email=str(d.get("email", "")),
+            photo_url=str(d.get("photo_url") or d.get("photoUrl") or ""),
+        )
+
+
+@dataclass
 class Site:
-    """A section site associated to the hub."""
+    """A section site associated to the hub.
+
+    ``type`` selects the renderer: ``"section"`` (default; libraries + links),
+    ``"faq"`` (renders ``questions``), or ``"people"`` (renders ``people``).
+    """
 
     key: str
     title: str
@@ -59,6 +94,9 @@ class Site:
     permissions: dict[str, Any] = field(default_factory=dict)
     libraries: list[Library] = field(default_factory=list)
     links: list[str] = field(default_factory=list)
+    type: str = "section"
+    questions: list[FaqEntry] = field(default_factory=list)
+    people: list[Person] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> "Site":
@@ -71,6 +109,9 @@ class Site:
             permissions=dict(d.get("permissions", {})),
             libraries=[Library.from_dict(l) for l in d.get("libraries", [])],
             links=[str(x) for x in d.get("links", [])],
+            type=str(d.get("type", "section")),
+            questions=[FaqEntry.from_dict(q) for q in d.get("questions", [])],
+            people=[Person.from_dict(p) for p in d.get("people", [])],
         )
 
 

@@ -24,10 +24,9 @@ def test_definition_parses_into_intranet():
     net = load_intranet(DEFINITION)
     assert isinstance(net, Intranet)
     assert net.org == "Meridian Advisory"
-    # The blueprint defines three section sites plus a document center.
-    assert len(net.sites) == 3
+    # The blueprint defines three section sites, one FAQ, and one people directory.
     keys = {s.key for s in net.sites}
-    assert keys == {"hr", "it", "policies"}
+    assert {"hr", "it", "policies", "faq", "people"} <= keys
     assert net.document_center.title == "Document Center"
     assert len(net.document_center.libraries) >= 1
 

@@ -59,6 +59,18 @@ def _css(theme: dict) -> str:
     footer {{ max-width: 1040px; margin: 24px auto; padding: 16px 24px; color: #6b7280;
             font-size: 12px; }}
     .meta {{ color: #6b7280; font-size: 13px; }}
+    .faq details {{ background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+            padding: 12px 16px; margin-bottom: 8px; }}
+    .faq summary {{ cursor: pointer; font-weight: 600; }}
+    .faq .answer {{ margin-top: 8px; color: #374151; font-size: 14px; }}
+    .people {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px; }}
+    .person-card {{ background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+            padding: 14px; text-align: center; }}
+    .person-card img, .person-card .photo-placeholder {{ width: 72px; height: 72px;
+            border-radius: 50%; object-fit: cover; background: #e5e7eb;
+            display: block; margin: 0 auto 8px; }}
+    .person-card h3 {{ margin: 4px 0 2px; font-size: 15px; }}
     """
 
 
@@ -199,12 +211,60 @@ def render_document_center(net: Intranet) -> str:
     return _layout(net, "document-center", dc.title, "".join(parts))
 
 
+def render_faq(net: Intranet, site: Site) -> str:
+    parts = [f'<h2 class="section">{escape(site.title)}</h2>']
+    if site.summary:
+        parts.append(f'<p class="meta">{escape(site.summary)}</p>')
+    parts.append('<div class="faq">')
+    for entry in site.questions:
+        parts.append(
+            "<details>"
+            f"<summary>{escape(entry.q)}</summary>"
+            f'<div class="answer">{escape(entry.a)}</div>'
+            "</details>"
+        )
+    parts.append("</div>")
+    return _layout(net, site.key, site.title, "".join(parts))
+
+
+def render_people(net: Intranet, site: Site) -> str:
+    parts = [f'<h2 class="section">{escape(site.title)}</h2>']
+    if site.summary:
+        parts.append(f'<p class="meta">{escape(site.summary)}</p>')
+    parts.append('<div class="people">')
+    for p in site.people:
+        if p.photo_url:
+            photo = f'<img src="{escape(p.photo_url)}" alt="{escape(p.name)}">'
+        else:
+            photo = '<div class="photo-placeholder"></div>'
+        email = (f'<a href="mailto:{escape(p.email)}">{escape(p.email)}</a>'
+                 if p.email else "")
+        parts.append(
+            '<div class="person-card">'
+            f"{photo}"
+            f"<h3>{escape(p.name)}</h3>"
+            f'<p class="meta">{escape(p.title)}</p>'
+            f'<p class="meta">{email}</p>'
+            "</div>"
+        )
+    parts.append("</div>")
+    return _layout(net, site.key, site.title, "".join(parts))
+
+
+def render_site(net: Intranet, site: Site) -> str:
+    if site.type == "faq":
+        return render_faq(net, site)
+    if site.type == "people":
+        return render_people(net, site)
+    return render_section(net, site)
+
+
 def render_all(net: Intranet) -> dict[str, str]:
     """Render every page. Returns ``{filename: html}`` in deterministic order."""
     pages: dict[str, str] = {}
     pages["index.html"] = render_home(net)
     for site in net.sites:
-        pages[f"{site.key}.html"] = render_section(net, site)
+        pages[f"{site.key}.html"] = render_site(net, site)
     # A News page reuses the home news block as its own section for the nav link.
     pages["news.html"] = _render_news_page(net)
     pages["document-center.html"] = render_document_center(net)
