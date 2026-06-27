@@ -1,5 +1,7 @@
 # SharePoint intranet generator
 
+[![CI](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml)
+
 Generate a complete modern intranet — home, news, section pages, **FAQ page**,
 **person directory**, and a document center — from a single
 `site-definition.json`, with **schema validation** that catches malformed
