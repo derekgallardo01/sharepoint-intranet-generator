@@ -20,6 +20,16 @@ python -m pytest -q                        # 19 unit tests
 
 Stdlib-only Python. Self-contained output (inline CSS, no external assets).
 
+## Run in Docker
+
+```bash
+docker build -t sharepoint-intranet-generator .
+docker run --rm -v $(pwd)/out:/app/out sharepoint-intranet-generator                                                                       # default (Meridian) intranet to ./out
+docker run --rm -v $(pwd)/out:/app/out sharepoint-intranet-generator python cli.py generate examples/site-definition-acme-manufacturing.json --out out   # Acme Manufacturing variant
+docker run --rm sharepoint-intranet-generator python cli.py validate site-definition.json                                                  # validate the default definition
+docker run --rm sharepoint-intranet-generator python evals/run.py                                                                          # 14 validation cases
+```
+
 ## The problem it solves
 
 SharePoint intranet projects stall in design-by-committee: stakeholders can't
