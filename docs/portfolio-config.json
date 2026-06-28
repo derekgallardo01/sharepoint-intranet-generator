@@ -1,0 +1,24 @@
+{
+  "repo": "sharepoint-intranet-generator",
+  "title": "SharePoint Intranet Generator",
+  "tagline": "Full SharePoint intranet from one JSON definition file. Schema validation catches the bugs before provisioning.",
+  "kicker": "SharePoint \u00b7 Information Architecture \u00b7 Capability Demo",
+  "features": [
+    {
+      "label": "Validation",
+      "value": "Schema + reference checks"
+    },
+    {
+      "label": "Page types",
+      "value": "Section, FAQ, People dir"
+    },
+    {
+      "label": "Templates",
+      "value": "2 industry definitions"
+    }
+  ],
+  "theme": {
+    "primary": "#1f5673",
+    "accent": "#c9a14a"
+  }
+}
