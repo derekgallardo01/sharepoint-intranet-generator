@@ -4,6 +4,11 @@
 
 **Live demo:** [derekgallardo01.github.io/sharepoint-intranet-generator](https://derekgallardo01.github.io/sharepoint-intranet-generator/) — both worked definitions (Meridian Advisory + Acme Manufacturing) rendered on every push.
 
+[![Live demo preview](docs/screenshots/02-meridian-home.png)](https://derekgallardo01.github.io/sharepoint-intranet-generator/)
+
+More pages: [Landing](docs/screenshots/01-landing.png) · [HR section](docs/screenshots/03-meridian-hr-section.png) · [FAQ accordion](docs/screenshots/04-meridian-faq.png) · [People directory](docs/screenshots/05-meridian-people.png) · [Acme Manufacturing home](docs/screenshots/06-acme-home.png) · [Acme Quality section](docs/screenshots/07-acme-quality-section.png)
+
+
 Generate a complete modern intranet — home, news, section pages, **FAQ page**,
 **person directory**, and a document center — from a single
 `site-definition.json`, with **schema validation** that catches malformed
