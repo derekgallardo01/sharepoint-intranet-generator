@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#)
 
+**Docs:** [Getting started](docs/getting-started.md) · [Architecture](docs/architecture.md) · [Customization](docs/customization.md) · [Evaluation](docs/evaluation.md) · [Diagrams](docs/diagrams.md) · [FAQ](docs/faq.md)
+
 **Live demo:** [derekgallardo01.github.io/sharepoint-intranet-generator](https://derekgallardo01.github.io/sharepoint-intranet-generator/) — both worked definitions (Meridian Advisory + Acme Manufacturing) rendered on every push.
 
 [![Live demo preview](docs/screenshots/02-meridian-home.png)](https://derekgallardo01.github.io/sharepoint-intranet-generator/)
