@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/derekgallardo01/sharepoint-intranet-generator/actions/workflows/ci.yml)
 
+**Live demo:** [derekgallardo01.github.io/sharepoint-intranet-generator](https://derekgallardo01.github.io/sharepoint-intranet-generator/) — both worked definitions (Meridian Advisory + Acme Manufacturing) rendered on every push.
+
 Generate a complete modern intranet — home, news, section pages, **FAQ page**,
 **person directory**, and a document center — from a single
 `site-definition.json`, with **schema validation** that catches malformed
